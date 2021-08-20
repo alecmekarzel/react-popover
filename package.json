@@ -1,11 +1,15 @@
 {
 	"name": "@alecmekarzel/react-popover",
 	"author": "Alec Mekarzel",
-	"version": "0.1.0",
+	"version": "0.1.14",
+	"repository": "git://github.com/alecmekarzel/react-popover.git",
+	"publishConfig": {
+		"registry":"https://npm.pkg.github.com"
+	},
 	"license": "MIT",
 	"main": "dist/index.js",
 	"typings": "dist/index.d.ts",
-	"module": "dist/popover.esm.js",
+	"module": "dist/react-popover.esm.js",
 	"files": [
 		"dist",
 		"src"

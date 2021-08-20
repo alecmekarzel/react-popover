@@ -15,11 +15,6 @@ let Wrapper = styled('div', React.forwardRef)`
 `;
 
 let Inner = styled('div')`
-  padding: 7px;
-  border-radius: 9px;
-  border: solid #efefef 1px;
-  background: white;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.12);
   opacity: 1;
 `;
 
@@ -31,14 +26,14 @@ let fadeIn = keyframes`
 
   to {
 	opacity: 1;
-	margin-top: 6px;
+	margin-top: 4px;
   }
 `;
 
 let fadeOut = keyframes`
   from {
 	opacity: 1;
-	margin-top: 6px;
+	margin-top: 4px;
   }
 
   to {
@@ -110,7 +105,7 @@ export let Popover = React.forwardRef(
 							<Inner
 								style={{
 									animation: `${open ? fadeIn : fadeOut
-										} 0.2s ease-in-out forwards`,
+										} 0.1s ease-in-out forwards`,
 								}}
 							>
 								{popoverEl}
