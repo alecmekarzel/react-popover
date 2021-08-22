@@ -3,32 +3,32 @@
 </p>
 
 <h1 align="center">
-  <strong>Varld's</strong> Popover and Tooltip Library
+  <strong>alecmeka's</strong> Popover and Tooltip Library
 </h1>
 
 <p align="center">
-  Simple Tooltip and Popover components made by Varld 💖
+  Simple Tooltip and Popover components made by alecmeka 💖
 </p>
 
 ## Examples
 
-- 🚗 [Tooltip](https://codesandbox.io/s/varld-tooltip-cmzi0?file=/src/App.tsx)
-- 🚚 [Popover](https://codesandbox.io/s/varld-popover-mq4yz?file=/src/App.tsx)
+- 🚗 [Tooltip](https://codesandbox.io/s/)
+- 🚚 [Popover](https://codesandbox.io/s/)
 
 ## Install
 
 ```bash
 # yarn
-yarn add @varld/popover
+yarn add @alecmeka/react-popover
 
 # npm
-npm install --save @varld/popover 
+npm install --save @alecmeka/react-popover 
 ```
 
 ## Tooltips
 
 ```tsx
-import { Tooltip } from '@varld/popover';
+import { Tooltip } from '@alecmeka/react-popover';
 
 let Component = () => {
   return (
@@ -42,7 +42,7 @@ let Component = () => {
 ## Popovers
 
 ```tsx
-import { Popover } from '@varld/popover';
+import { Popover } from '@alecmeka/react-popover';
 
 let Component = () => {
   return (
@@ -73,6 +73,6 @@ The `close` value is a function, which you can call to close the popover.
 
 ## License
 
-MIT © [Tobias Herber](https://github.com/herber)
+© [Alec Meka](https://github.com/alecmeka)
 
-[![Made by Varld](https://potato.varld.co/oss/badge.svg)](https://varld.co)
+[![Made by Alec Meka](https://potato.alecmeka.co/oss/badge.svg)](https://alecmeka.co)

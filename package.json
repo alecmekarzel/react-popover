@@ -1,12 +1,11 @@
 {
 	"name": "@alecmekarzel/react-popover",
 	"author": "Alec Mekarzel",
-	"version": "0.1.14",
+	"version": "0.2.0",
 	"repository": "git://github.com/alecmekarzel/react-popover.git",
 	"publishConfig": {
-		"registry":"https://npm.pkg.github.com"
+		"registry": "https://npm.pkg.github.com"
 	},
-	"license": "MIT",
 	"main": "dist/index.js",
 	"typings": "dist/index.d.ts",
 	"module": "dist/react-popover.esm.js",
@@ -27,21 +26,18 @@
 	},
 	"dependencies": {
 		"@popperjs/core": "^2.6.0",
+		"@types/react": "^17.0.1",
+		"@types/react-dom": "^17.0.0",
 		"@varld/outside-click": "^0.1.1",
 		"goober": "^2.0.30",
+		"react": ">=16",
+		"react-dom": "^17.0.1",
 		"react-popper": "^2.2.4",
 		"use-delayed": "^0.1.0"
 	},
-	"peerDependencies": {
-		"react": ">=16"
-	},
 	"devDependencies": {
 		"@size-limit/preset-small-lib": "^4.5.5",
-		"@types/react": "^17.0.1",
-		"@types/react-dom": "^17.0.0",
 		"husky": "^5.0.9",
-		"react": "^17.0.1",
-		"react-dom": "^17.0.1",
 		"size-limit": "^4.9.2",
 		"tsdx": "^0.14.1",
 		"tslib": "^2.1.0",

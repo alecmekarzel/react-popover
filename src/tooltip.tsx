@@ -1,8 +1,8 @@
-import { keyframes, styled } from 'goober';
-import React, { useEffect, useRef, useState } from 'react';
-import { usePopper } from 'react-popper';
-import useDelayed from 'use-delayed';
-import outsideClick from '@varld/outside-click';
+import { keyframes, styled } from 'goober'
+import React, { useEffect, useRef, useState } from 'react'
+import { usePopper } from 'react-popper'
+import useDelayed from 'use-delayed'
+import outsideClick from '@varld/outside-click'
 
 let Wrapper = styled('div', React.forwardRef)`
   width: fit-content;
@@ -12,7 +12,7 @@ let Wrapper = styled('div', React.forwardRef)`
   &.open {
 	pointer-events: all;
   }
-`;
+`
 
 let Inner = styled('div')`
   border: solid #efefef 1px;
@@ -23,7 +23,7 @@ let Inner = styled('div')`
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
   font-size: 0.8em;
   font-weight: 500;
-`;
+`
 
 let fadeIn = keyframes`
   from {
@@ -35,7 +35,7 @@ let fadeIn = keyframes`
 	opacity: 1;
 	margin-top: 5px;
   }
-`;
+`
 
 let fadeOut = keyframes`
   from {
@@ -47,29 +47,29 @@ let fadeOut = keyframes`
 	opacity: 0;
 	margin-top: 0px;
   }
-`;
+`
 
 export let Tooltip = ({
 	content,
 	children,
 }: {
-	content: string;
-	children: React.ReactElement | React.ReactElement[];
+	content: string
+	children: React.ReactElement | React.ReactElement[]
 }) => {
-	let [referenceElement, setReferenceElement] = useState(null) as any;
-	let [popperElement, setPopperElement] = useState(null) as any;
-	let { styles, attributes } = usePopper(referenceElement, popperElement);
-	let [open, setOpen] = useState(false);
-	let visible = useDelayed(open, 500, [true]);
-	let enterToRef = useRef<any>();
+	let [referenceElement, setReferenceElement] = useState(null) as any
+	let [popperElement, setPopperElement] = useState(null) as any
+	let { styles, attributes } = usePopper(referenceElement, popperElement)
+	let [open, setOpen] = useState(false)
+	let visible = useDelayed(open, 500, [true])
+	let enterToRef = useRef<any>()
 
 	useEffect(() => {
 		return outsideClick(
 			[referenceElement, popperElement],
 			() => setOpen(false),
 			() => open
-		);
-	}, [referenceElement, popperElement, open]);
+		)
+	}, [referenceElement, popperElement, open])
 
 	return (
 		<>
@@ -77,18 +77,18 @@ export let Tooltip = ({
 				tabIndex={0}
 				ref={setReferenceElement}
 				onClick={() => {
-					if (open) clearTimeout(enterToRef.current);
-					setOpen(true);
+					if (open) clearTimeout(enterToRef.current)
+					setOpen(true)
 				}}
 				onMouseEnter={() => {
-					clearTimeout(enterToRef.current);
+					clearTimeout(enterToRef.current)
 					enterToRef.current = setTimeout(() => {
-						setOpen(true);
-					}, 300);
+						setOpen(true)
+					}, 300)
 				}}
 				onMouseLeave={() => {
-					clearTimeout(enterToRef.current);
-					setOpen(false);
+					clearTimeout(enterToRef.current)
+					setOpen(false)
 				}}
 				style={{
 					width: 'fit-content',
@@ -115,5 +115,5 @@ export let Tooltip = ({
 				</Wrapper>
 			)}
 		</>
-	);
-};
+	)
+}
