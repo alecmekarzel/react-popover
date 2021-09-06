@@ -2,66 +2,65 @@ import { keyframes, styled } from 'goober'
 import React, { useEffect, useRef, useState } from 'react'
 import { usePopper } from 'react-popper'
 import useDelayed from 'use-delayed'
-import outsideClick from '@varld/outside-click'
+import outsideClick from '@alecmekarzel/outside-click'
 
 let Wrapper = styled('div', React.forwardRef)`
-  width: fit-content;
-  z-index: 9999;
-  pointer-events: none;
+	width: fit-content;
+	z-index: 9999;
+	pointer-events: none;
 
-  &.open {
-	pointer-events: all;
-  }
+	&.open {
+		pointer-events: all;
+	}
 `
 
 let Inner = styled('div')`
-  border: solid #efefef 1px;
-  border-radius: 5px;
-  padding: 6px 10px;
-  background: white;
-  color: black;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-  font-size: 0.8em;
-  font-weight: 500;
+	color: black;
+	font-size: 0.8em;
+	font-weight: 500;
+	background: white;
+	padding: 6px 10px;
+	border: solid #efefef 1px;
+	border-radius: 5px;
+	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 `
 
 let fadeIn = keyframes`
-  from {
-	opacity: 0;
-	margin-top: 0px;
-  }
+	from {
+		opacity: 0;
+		margin-top: -5px;
+	}
 
-  to {
-	opacity: 1;
-	margin-top: 5px;
-  }
+	to {
+		opacity: 1;
+		margin-top: 0px;
+	}
 `
 
 let fadeOut = keyframes`
-  from {
-	opacity: 1;
-	margin-top: 5px;
-  }
+	from {
+		opacity: 1;
+		margin-top: 0px;
+	}
 
-  to {
-	opacity: 0;
-	margin-top: 0px;
-  }
+	to {
+		opacity: 0;
+		margin-top: -5px;
+	}
 `
 
-export let Tooltip = ({
-	content,
-	children,
-}: {
-	content: string
-	children: React.ReactElement | React.ReactElement[]
-}) => {
-	let [referenceElement, setReferenceElement] = useState(null) as any
-	let [popperElement, setPopperElement] = useState(null) as any
-	let { styles, attributes } = usePopper(referenceElement, popperElement)
+export let Tooltip = ({ content, children }) => {
+	let [referenceElement, setReferenceElement] = useState(null)
+	let [popperElement, setPopperElement] = useState(null)
+
+	let { styles, attributes } = usePopper(referenceElement, popperElement, {
+		placement: 'top',
+		modifiers: []
+	})
+	
 	let [open, setOpen] = useState(false)
 	let visible = useDelayed(open, 500, [true])
-	let enterToRef = useRef<any>()
+	let enterToRef = useRef()
 
 	useEffect(() => {
 		return outsideClick(

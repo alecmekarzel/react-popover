@@ -4,5 +4,6 @@ import * as React from 'react'
 setup(React.createElement)
 
 export * from './popover'
+export * from './popup'
 export * from './tooltip'
 export * from './portal'

@@ -1,65 +1,72 @@
 import { styled, keyframes } from 'goober'
-import React, { createRef, useCallback, useEffect, useState } from 'react'
+import React, { createRef, useMemo, useCallback, useEffect, useState } from 'react'
 import { usePopper } from 'react-popper'
 import useDelayed from 'use-delayed'
-import outsideClick from '@varld/outside-click'
+import outsideClick from '@alecmekarzel/outside-click'
 import { RenderToBody } from './portal'
 
 let Wrapper = styled('div', React.forwardRef)`
-  z-index: 9999;
-  pointer-events: none;
+	z-index: 9999;
+	pointer-events: none;
 
-  &.open {
-	pointer-events: all;
-  }
+	&.open {
+		pointer-events: all;
+	}
 `
 
 let Inner = styled('div')`
-  opacity: 1;
+	opacity: 1;
+	position: relative;
 `
 
 let fadeIn = keyframes`
-  from {
-	opacity: 0;
-	margin-top: 0px;
-  }
+	from {
+		opacity: 0;
+		top: -8px;
+	}
 
-  to {
-	opacity: 1;
-	margin-top: 4px;
-  }
+	to {
+		opacity: 1;
+		top: -4px;
+	}
 `
 
 let fadeOut = keyframes`
-  from {
-	opacity: 1;
-	margin-top: 4px;
-  }
+	from {
+		opacity: 1;
+		top: -4px;
+	}
 
-  to {
-	opacity: 0;
-	margin-top: 0px;
-  }
+	to {
+		opacity: 0;
+		top: -8px;
+	}
 `
 
-export let Popover = React.forwardRef(
-	(
-		{
-			popover,
-			children,
-		}: {
-			popover: (d: {
-				visible: boolean
-				open: boolean
-				close: () => void
-			}) => React.ReactElement
-			children: React.ReactElement | React.ReactElement[]
-		},
-		ref: any
-	) => {
-		let [referenceElement, setReferenceElement] = useState(null) as any
-		let [popperElement, setPopperElement] = useState(null) as any
-		let { styles, attributes } = usePopper(referenceElement, popperElement)
+export let Popup = React.forwardRef(({ popover, children, }, ref) => {
+		let [referenceElement, setReferenceElement] = useState(null)
+		let [popperElement, setPopperElement] = useState(null)
+
+		const customModifier = useMemo(() => ({
+			name: 'computeStyles',
+			enabled: true,
+			fn({state}) {
+				state.styles.popper = {
+					...state.styles.popper,
+					position: 'fixed',
+					left: `${(window.innerWidth - state.rects.popper.width) / 2}px`,
+					top: '50%',
+					transform: 'translateY(-50%)',
+				}
+		
+				return state
+			},
+		}), [])
+
+		let { styles, attributes } = usePopper(referenceElement, popperElement, {
+			modifiers: [customModifier]
+		})
+		
 		let [open, setOpen] = useState(false)
 		let visible = useDelayed(open, 500, [true])
 		let close = useCallback(() => setOpen(false), [setOpen])
@@ -69,12 +76,13 @@ export let Popover = React.forwardRef(
 		useEffect(() => {
 			return outsideClick(
 				[referenceElement, popperElement],
-				() => setOpen(false),
-				() => open
+				() => setOpen(false), // set open to false on outside click
+				() => open // determine whether popup is enabled
 			)
 		}, [referenceElement, popperElement, open])
 
 		useEffect(() => {
+			// if there's no ref, create one
 			if (!ref) ref = createRef()
 			ref.current = { setOpen }
 		}, [ref, setOpen])
