@@ -96,8 +96,7 @@ export let Popover = React.forwardRef(({ popover, children }, ref) => {
 						>
 							<Inner
 								style={{
-									animation: `${open ? fadeIn : fadeOut
-										} 0.1s ease-in-out forwards`,
+									animation: `${open ? fadeIn : fadeOut } 0.1s ease-in-out forwards`,
 								}}
 							>
 								{popoverEl}

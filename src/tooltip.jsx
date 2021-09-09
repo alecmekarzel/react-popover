@@ -83,7 +83,7 @@ export let Tooltip = ({ content, children }) => {
 					clearTimeout(enterToRef.current)
 					enterToRef.current = setTimeout(() => {
 						setOpen(true)
-					}, 300)
+					}, 100)
 				}}
 				onMouseLeave={() => {
 					clearTimeout(enterToRef.current)
@@ -106,7 +106,7 @@ export let Tooltip = ({ content, children }) => {
 				>
 					<Inner
 						style={{
-							animation: `${open ? fadeIn : fadeOut} 0.2s ease-in-out forwards`,
+							animation: `${open ? fadeIn : fadeOut} 0.1s ease-in-out forwards`,
 						}}
 					>
 						{content}

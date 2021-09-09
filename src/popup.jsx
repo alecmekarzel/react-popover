@@ -5,6 +5,16 @@ import useDelayed from 'use-delayed'
 import outsideClick from '@alecmekarzel/outside-click'
 import { RenderToBody } from './portal'
 
+let Shadow = styled('div', React.forwardRef)`
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.4);
+	position: fixed;
+	top: 0;
+	left: 0;
+
+	z-index: 9998;
+`
 let Wrapper = styled('div', React.forwardRef)`
 	z-index: 9999;
 	pointer-events: none;
@@ -104,6 +114,9 @@ export let Popup = React.forwardRef(({ popover, children, }, ref) => {
 
 				{visible && (
 					<RenderToBody>
+						<Shadow style={{
+							animation: `${open ? fadeIn : fadeOut} 0.1s ease-in-out forwards`,
+						}}/>
 						<Wrapper
 							className={open ? 'open' : ''}
 							ref={setPopperElement}
@@ -112,8 +125,7 @@ export let Popup = React.forwardRef(({ popover, children, }, ref) => {
 						>
 							<Inner
 								style={{
-									animation: `${open ? fadeIn : fadeOut
-										} 0.1s ease-in-out forwards`,
+									animation: `${open ? fadeIn : fadeOut} 0.1s ease-in-out forwards`,
 								}}
 							>
 								{popoverEl}
