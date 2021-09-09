@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { usePopper } from 'react-popper'
 import useDelayed from 'use-delayed'
 import outsideClick from '@alecmekarzel/outside-click'
+import { RenderToBody } from './portal'
 
 let Wrapper = styled('div', React.forwardRef)`
 	width: fit-content;
@@ -15,14 +16,13 @@ let Wrapper = styled('div', React.forwardRef)`
 `
 
 let Inner = styled('div')`
-	color: black;
+	color: white;
 	font-size: 0.8em;
 	font-weight: 500;
-	background: white;
-	padding: 6px 10px;
-	border: solid #efefef 1px;
-	border-radius: 5px;
-	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+	background: rgba(0, 0, 0, 0.8);
+	padding: 6px 9px;
+	border-radius: 3px;
+	margin-bottom: 4px;
 `
 
 let fadeIn = keyframes`
@@ -72,9 +72,7 @@ export let Tooltip = ({ content, children }) => {
 
 	return (
 		<>
-			<div
-				tabIndex={0}
-				ref={setReferenceElement}
+			<div tabIndex={0} ref={setReferenceElement}
 				onClick={() => {
 					if (open) clearTimeout(enterToRef.current)
 					setOpen(true)
@@ -92,26 +90,19 @@ export let Tooltip = ({ content, children }) => {
 				style={{
 					width: 'fit-content',
 					height: 'fit-content',
-				}}
-			>
+					display: 'inline-block'
+				}}>
 				{children}
 			</div>
 
 			{visible && (
-				<Wrapper
-					className={open ? 'open' : ''}
-					ref={setPopperElement}
-					style={styles.popper}
-					{...attributes.popper}
-				>
-					<Inner
-						style={{
-							animation: `${open ? fadeIn : fadeOut} 0.1s ease-in-out forwards`,
-						}}
-					>
-						{content}
-					</Inner>
-				</Wrapper>
+				<RenderToBody>
+					<Wrapper className={open ? 'open' : ''} ref={setPopperElement} style={styles.popper} {...attributes.popper}>
+						<Inner style={{ animation: `${open ? fadeIn : fadeOut} 0.1s ease-in-out forwards` }}>
+							{content}
+						</Inner>
+					</Wrapper>
+				</RenderToBody>
 			)}
 		</>
 	)

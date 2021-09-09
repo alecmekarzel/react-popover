@@ -99,35 +99,21 @@ export let Popup = React.forwardRef(({ popover, children, }, ref) => {
 
 		return (
 			<>
-				<div
-					tabIndex={0}
-					ref={setReferenceElement}
+				<div tabIndex={0} ref={setReferenceElement}
 					onClick={() => setOpen(!open)}
 					style={{
 						width: 'fit-content',
 						height: 'fit-content',
 					}}
-					data-popover-anchor
-				>
+					data-popover-anchor>
 					{children}
 				</div>
 
 				{visible && (
 					<RenderToBody>
-						<Shadow style={{
-							animation: `${open ? fadeIn : fadeOut} 0.1s ease-in-out forwards`,
-						}}/>
-						<Wrapper
-							className={open ? 'open' : ''}
-							ref={setPopperElement}
-							style={styles.popper}
-							{...attributes.popper}
-						>
-							<Inner
-								style={{
-									animation: `${open ? fadeIn : fadeOut} 0.1s ease-in-out forwards`,
-								}}
-							>
+						<Shadow style={{ animation: `${open ? fadeIn : fadeOut} 0.1s ease-in-out forwards` }}/>
+						<Wrapper className={open ? 'open' : ''} ref={setPopperElement} style={styles.popper} {...attributes.popper}>
+							<Inner style={{ animation: `${open ? fadeIn : fadeOut} 0.1s ease-in-out forwards` }}>
 								{popoverEl}
 							</Inner>
 						</Wrapper>
