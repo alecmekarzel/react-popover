@@ -43,7 +43,7 @@ let fadeOut = keyframes`
 	}
 `
 
-export let Popover = React.forwardRef(({ popover, children }, ref) => {
+export let Popover = React.forwardRef(({ element, children }, ref) => {
 		let [referenceElement, setReferenceElement] = useState(null)
 		let [popperElement, setPopperElement] = useState(null)
 		
@@ -56,7 +56,7 @@ export let Popover = React.forwardRef(({ popover, children }, ref) => {
 		let visible = useDelayed(open, 500, [true])
 		let close = useCallback(() => setOpen(false), [setOpen])
 
-		let popoverEl = popover({ visible, open, close })
+		let popoverEl = element({ visible, open, close })
 
 		useEffect(() => {
 			return outsideClick(

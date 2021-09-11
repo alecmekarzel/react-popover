@@ -53,7 +53,7 @@ let fadeOut = keyframes`
 	}
 `
 
-export let Popup = React.forwardRef(({ popover, children, }, ref) => {
+export let Popup = React.forwardRef(({ element, children, }, ref) => {
 		let [referenceElement, setReferenceElement] = useState(null)
 		let [popperElement, setPopperElement] = useState(null)
 
@@ -81,7 +81,7 @@ export let Popup = React.forwardRef(({ popover, children, }, ref) => {
 		let visible = useDelayed(open, 500, [true])
 		let close = useCallback(() => setOpen(false), [setOpen])
 
-		let popoverEl = popover({ visible, open, close })
+		let popupEl = element({ visible, open, close })
 
 		useEffect(() => {
 			return outsideClick(
@@ -114,7 +114,7 @@ export let Popup = React.forwardRef(({ popover, children, }, ref) => {
 						<Shadow style={{ animation: `${open ? fadeIn : fadeOut} 0.1s ease-in-out forwards` }}/>
 						<Wrapper className={open ? 'open' : ''} ref={setPopperElement} style={styles.popper} {...attributes.popper}>
 							<Inner style={{ animation: `${open ? fadeIn : fadeOut} 0.1s ease-in-out forwards` }}>
-								{popoverEl}
+								{popupEl}
 							</Inner>
 						</Wrapper>
 					</RenderToBody>
