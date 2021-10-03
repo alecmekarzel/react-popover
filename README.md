@@ -14,6 +14,7 @@
 
 - 🚗 [Tooltip](https://codesandbox.io/s/)
 - 🚚 [Popover](https://codesandbox.io/s/)
+- 🚚 [Popup](https://codesandbox.io/s/)
 
 ## Install
 
@@ -27,7 +28,7 @@ npm install --save @alecmeka/react-popover
 
 ## Tooltips
 
-```tsx
+```jsx
 import { Tooltip } from '@alecmeka/react-popover';
 
 let Component = () => {
@@ -41,7 +42,7 @@ let Component = () => {
 
 ## Popovers
 
-```tsx
+```jsx
 import { Popover } from '@alecmeka/react-popover';
 
 let Component = () => {

@@ -5,7 +5,7 @@ import useDelayed from 'use-delayed'
 import outsideClick from '@alecmekarzel/outside-click'
 import { RenderToBody } from './portal'
 
-let Shadow = styled('div', React.forwardRef)`
+let Shadow = styled('div')`
 	width: 100%;
 	height: 100%;
 	background: rgba(0, 0, 0, 0.4);
@@ -13,7 +13,7 @@ let Shadow = styled('div', React.forwardRef)`
 	top: 0;
 	left: 0;
 
-	z-index: 9998;
+	z-index: 9997;
 `
 let Wrapper = styled('div', React.forwardRef)`
 	z-index: 9999;
@@ -64,9 +64,9 @@ export let Popup = React.forwardRef(({ element, children, }, ref) => {
 				state.styles.popper = {
 					...state.styles.popper,
 					position: 'fixed',
-					left: `${(window.innerWidth - state.rects.popper.width) / 2}px`,
 					top: '50%',
-					transform: 'translateY(-50%)',
+					left: '50%',
+					transform: 'translate(-50%, -50%)',
 				}
 		
 				return state
@@ -104,6 +104,7 @@ export let Popup = React.forwardRef(({ element, children, }, ref) => {
 					style={{
 						width: 'fit-content',
 						height: 'fit-content',
+						display: 'inline-block',
 					}}
 					data-popover-anchor>
 					{children}

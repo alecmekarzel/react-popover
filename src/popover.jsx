@@ -6,7 +6,7 @@ import outsideClick from '@alecmekarzel/outside-click'
 import { RenderToBody } from './portal'
 
 let Wrapper = styled('div', React.forwardRef)`
-	z-index: 9999;
+	z-index: 9998;
 	pointer-events: none;
 
 	&.open {
@@ -43,12 +43,13 @@ let fadeOut = keyframes`
 	}
 `
 
-export let Popover = React.forwardRef(({ element, children }, ref) => {
+export let Popover = React.forwardRef(({ element, children, placement }, ref) => {
 		let [referenceElement, setReferenceElement] = useState(null)
 		let [popperElement, setPopperElement] = useState(null)
 		
+		// Setup popper
 		let { styles, attributes } = usePopper(referenceElement, popperElement, {
-			placement: 'top',
+			placement: placement || 'top',
 			modifiers: []
 		})
 
@@ -56,7 +57,7 @@ export let Popover = React.forwardRef(({ element, children }, ref) => {
 		let visible = useDelayed(open, 500, [true])
 		let close = useCallback(() => setOpen(false), [setOpen])
 
-		let popoverEl = element({ visible, open, close })
+		let popoverEl = element({ visible, open, close }) // Take the element function, pass in props to function for next functional component
 
 		useEffect(() => {
 			return outsideClick(
@@ -80,6 +81,7 @@ export let Popover = React.forwardRef(({ element, children }, ref) => {
 					style={{
 						width: 'fit-content',
 						height: 'fit-content',
+						display: 'inline-block',
 					}}
 					data-popover-anchor
 				>

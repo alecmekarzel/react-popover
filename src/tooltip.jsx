@@ -49,12 +49,12 @@ let fadeOut = keyframes`
 	}
 `
 
-export let Tooltip = ({ content, children }) => {
+export let Tooltip = ({ content, children, placement }) => {
 	let [referenceElement, setReferenceElement] = useState(null)
 	let [popperElement, setPopperElement] = useState(null)
 
 	let { styles, attributes } = usePopper(referenceElement, popperElement, {
-		placement: 'top',
+		placement: placement || 'top',
 		modifiers: []
 	})
 	
