@@ -1,7 +1,7 @@
 {
 	"name": "@alecmekarzel/react-popover",
 	"author": "Alec Mekarzel",
-	"version": "0.2.50",
+	"version": "0.2.51",
 	"repository": "git://github.com/alecmekarzel/react-popover.git",
 	"publishConfig": {
 		"registry": "https://npm.pkg.github.com"
