@@ -1,7 +1,7 @@
 {
 	"name": "@alecmekarzel/react-popover",
 	"author": "Alec Mekarzel",
-	"version": "0.2.52",
+	"version": "0.2.57",
 	"repository": "git://github.com/alecmekarzel/react-popover.git",
 	"publishConfig": {
 		"registry": "https://npm.pkg.github.com"
@@ -45,8 +45,7 @@
 			"pre-commit": "tsdx lint"
 		}
 	},
-	"size-limit": [
-		{
+	"size-limit": [{
 			"path": "dist/popover.cjs.production.min.js",
 			"limit": "10 KB"
 		},
