@@ -87,6 +87,7 @@ export let Popover = React.forwardRef(
 						width: "fit-content",
 						height: "fit-content",
 						display: "inline-block",
+						cursor: "pointer",
 					}}
 					data-popover-anchor
 				>
