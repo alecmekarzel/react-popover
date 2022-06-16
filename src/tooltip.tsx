@@ -5,8 +5,6 @@ import useDelayed from 'use-delayed'
 import outsideClick from '@alecmekarzel/outside-click'
 import { RenderToBody } from './portal'
 
-import { type Placement } from '@popperjs/core'
-
 let Wrapper = styled('div', React.forwardRef)`
 	width: fit-content;
 	z-index: 9999;
@@ -54,7 +52,7 @@ let fadeOut = keyframes`
 type TooltipProps = {
 	content: string
 	children: React.ReactNode
-	placement?: Placement
+	placement?: any
 }
 
 export let Tooltip = ({

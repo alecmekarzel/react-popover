@@ -4,7 +4,6 @@ import { usePopper } from 'react-popper'
 import useDelayed from 'use-delayed'
 import outsideClick from '@alecmekarzel/outside-click'
 import { RenderToBody } from './portal'
-import { type Placement } from '@popperjs/core'
 
 let Wrapper = styled('div', React.forwardRef)`
 	z-index: 9998;
@@ -46,12 +45,12 @@ let fadeOut = keyframes`
 
 type PopoverProps = {
 	element: (d: {
-		visible: boolean;
-		open: boolean;
-		close: () => void;
+		visible: boolean
+		open: boolean
+		close: () => void
 	}) => React.ReactElement
 	children: React.ReactElement | React.ReactElement[]
-	placement?: Placement
+	placement?: any
 }
 
 export let Popover = React.forwardRef(
