@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { usePopper } from 'react-popper'
 import useDelayed from 'use-delayed'
 import outsideClick from '@alecmekarzel/outside-click'
-import { RenderToBody } from './portal'
+import { RenderTo } from './portal'
 
 let Wrapper = styled('div', React.forwardRef)`
 	width: fit-content;
@@ -53,12 +53,14 @@ type TooltipProps = {
 	content: string
 	children: React.ReactNode
 	placement?: any
+	attachTo?: HTMLElement
 }
 
 export let Tooltip = ({
 	content,
 	children,
 	placement = 'top',
+	attachTo,
 }: TooltipProps) => {
 	let [referenceElement, setReferenceElement] = useState(null) as any
 	let [popperElement, setPopperElement] = useState(null) as any
@@ -109,7 +111,7 @@ export let Tooltip = ({
 			</div>
 
 			{visible && (
-				<RenderToBody>
+				<RenderTo custom={attachTo ? attachTo : document.body}>
 					<Wrapper
 						className={open ? 'open' : ''}
 						ref={setPopperElement}
@@ -126,7 +128,7 @@ export let Tooltip = ({
 							{content}
 						</Inner>
 					</Wrapper>
-				</RenderToBody>
+				</RenderTo>
 			)}
 		</>
 	)

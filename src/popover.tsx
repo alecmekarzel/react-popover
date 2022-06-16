@@ -3,7 +3,7 @@ import React, { createRef, useCallback, useEffect, useState } from 'react'
 import { usePopper } from 'react-popper'
 import useDelayed from 'use-delayed'
 import outsideClick from '@alecmekarzel/outside-click'
-import { RenderToBody } from './portal'
+import { RenderTo } from './portal'
 
 let Wrapper = styled('div', React.forwardRef)`
 	z-index: 9998;
@@ -51,10 +51,14 @@ type PopoverProps = {
 	}) => React.ReactElement
 	children: React.ReactElement | React.ReactElement[]
 	placement?: any
+	attachTo?: HTMLElement
 }
 
 export let Popover = React.forwardRef(
-	({ element, children, placement = 'top' }: PopoverProps, ref: any) => {
+	(
+		{ element, children, placement = 'top', attachTo }: PopoverProps,
+		ref: any
+	) => {
 		let [referenceElement, setReferenceElement] = useState(null) as any
 		let [popperElement, setPopperElement] = useState(null) as any
 
@@ -106,7 +110,7 @@ export let Popover = React.forwardRef(
 				</div>
 
 				{visible && (
-					<RenderToBody>
+					<RenderTo custom={attachTo ? attachTo : document.body}>
 						<Wrapper
 							className={open ? 'open' : ''}
 							ref={setPopperElement}
@@ -123,7 +127,7 @@ export let Popover = React.forwardRef(
 								{popoverEl}
 							</Inner>
 						</Wrapper>
-					</RenderToBody>
+					</RenderTo>
 				)}
 			</>
 		)

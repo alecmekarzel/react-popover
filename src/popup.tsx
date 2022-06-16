@@ -9,7 +9,7 @@ import React, {
 import { usePopper } from 'react-popper'
 import useDelayed from 'use-delayed'
 import outsideClick from '@alecmekarzel/outside-click'
-import { RenderToBody } from './portal'
+import { RenderTo } from './portal'
 
 let Shadow = styled('div')`
 	width: 100%;
@@ -86,10 +86,11 @@ type PopupProps = {
 		close: () => void
 	}) => React.ReactElement
 	children: React.ReactElement | React.ReactElement[]
+	attachTo?: HTMLElement
 }
 
 export let Popup = React.forwardRef(
-	({ element, children }: PopupProps, ref: any) => {
+	({ element, children, attachTo }: PopupProps, ref: any) => {
 		let [referenceElement, setReferenceElement] = useState(null) as any
 		let [popperElement, setPopperElement] = useState(null) as any
 
@@ -157,7 +158,7 @@ export let Popup = React.forwardRef(
 				</div>
 
 				{visible && (
-					<RenderToBody>
+					<RenderTo custom={attachTo ? attachTo : document.body}>
 						<Shadow
 							style={{
 								animation: `${
@@ -181,7 +182,7 @@ export let Popup = React.forwardRef(
 								{popupEl}
 							</Inner>
 						</Wrapper>
-					</RenderToBody>
+					</RenderTo>
 				)}
 			</>
 		)
