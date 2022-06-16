@@ -5,6 +5,8 @@ import useDelayed from 'use-delayed'
 import outsideClick from '@alecmekarzel/outside-click'
 import { RenderToBody } from './portal'
 
+import { type Placement } from '@popperjs/core'
+
 let Wrapper = styled('div', React.forwardRef)`
 	width: fit-content;
 	z-index: 9999;
@@ -49,18 +51,28 @@ let fadeOut = keyframes`
 	}
 `
 
-export let Tooltip = ({ content, children, placement }) => {
-	let [referenceElement, setReferenceElement] = useState(null)
-	let [popperElement, setPopperElement] = useState(null)
+type TooltipProps = {
+	content: string
+	children: React.ReactNode
+	placement?: Placement
+}
+
+export let Tooltip = ({
+	content,
+	children,
+	placement = 'top',
+}: TooltipProps) => {
+	let [referenceElement, setReferenceElement] = useState(null) as any
+	let [popperElement, setPopperElement] = useState(null) as any
 
 	let { styles, attributes } = usePopper(referenceElement, popperElement, {
-		placement: placement || 'top',
-		modifiers: []
+		placement,
+		modifiers: [],
 	})
-	
+
 	let [open, setOpen] = useState(false)
 	let visible = useDelayed(open, 500, [true])
-	let enterToRef = useRef()
+	let enterToRef = useRef() as any
 
 	useEffect(() => {
 		return outsideClick(
@@ -72,7 +84,9 @@ export let Tooltip = ({ content, children, placement }) => {
 
 	return (
 		<>
-			<div tabIndex={0} ref={setReferenceElement}
+			<div
+				tabIndex={0}
+				ref={setReferenceElement}
 				onClick={() => {
 					if (open) clearTimeout(enterToRef.current)
 					setOpen(true)
@@ -90,15 +104,27 @@ export let Tooltip = ({ content, children, placement }) => {
 				style={{
 					width: 'fit-content',
 					height: 'fit-content',
-					display: 'inline-block'
-				}}>
+					display: 'inline-block',
+				}}
+			>
 				{children}
 			</div>
 
 			{visible && (
 				<RenderToBody>
-					<Wrapper className={open ? 'open' : ''} ref={setPopperElement} style={styles.popper} {...attributes.popper}>
-						<Inner style={{ animation: `${open ? fadeIn : fadeOut} 0.1s ease-in-out forwards` }}>
+					<Wrapper
+						className={open ? 'open' : ''}
+						ref={setPopperElement}
+						style={styles.popper}
+						{...attributes.popper}
+					>
+						<Inner
+							style={{
+								animation: `${
+									open ? fadeIn : fadeOut
+								} 0.1s ease-in-out forwards`,
+							}}
+						>
 							{content}
 						</Inner>
 					</Wrapper>

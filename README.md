@@ -12,9 +12,9 @@
 
 ## Examples
 
-- 🚗 [Tooltip](https://codesandbox.io/s/)
-- 🚚 [Popover](https://codesandbox.io/s/)
-- 🚚 [Popup](https://codesandbox.io/s/)
+-   🚗 [Tooltip](https://codesandbox.io/s/)
+-   🚚 [Popover](https://codesandbox.io/s/)
+-   🚚 [Popup](https://codesandbox.io/s/)
 
 ## Install
 
@@ -23,44 +23,45 @@
 yarn add @alecmeka/react-popover
 
 # npm
-npm install --save @alecmeka/react-popover 
+npm install --save @alecmeka/react-popover
 ```
 
 ## Tooltips
 
 ```jsx
-import { Tooltip } from '@alecmeka/react-popover';
+import { Tooltip } from '@alecmeka/react-popover'
 
 let Component = () => {
-  return (
-    <Tooltip content="I am a tooltip">
-      <button>I have a tooltip</button>
-    </Tooltip>
-  )
+	return (
+		<Tooltip content="I am a tooltip">
+			<button>I have a tooltip</button>
+		</Tooltip>
+	)
 }
 ```
 
 ## Popovers
 
 ```jsx
-import { Popover } from '@alecmeka/react-popover';
+import { Popover } from '@alecmeka/react-popover'
 
 let Component = () => {
-  return (
-    <Popover popover={({ visible, open, close }) => {
-      return (
-        <div>
-          I am a popover and i am {visible ? 'visible' : 'not visible'} and {open ? 'open' : 'not open'}
-
-          <button onClick={() => close()}>
-            Close me
-          </button>
-        </div>
-      )
-    }}>
-      <button>I have a popover</button>
-    </Popover>
-  )
+	return (
+		<Popover
+			popover={({ visible, open, close }) => {
+				return (
+					<div>
+						I am a popover and i am{' '}
+						{visible ? 'visible' : 'not visible'} and{' '}
+						{open ? 'open' : 'not open'}
+						<button onClick={() => close()}>Close me</button>
+					</div>
+				)
+			}}
+		>
+			<button>I have a popover</button>
+		</Popover>
+	)
 }
 ```
 

@@ -1,13 +1,14 @@
 {
 	"name": "@alecmekarzel/react-popover",
 	"author": "Alec Mekarzel",
-	"version": "0.2.58",
+	"version": "0.2.61",
 	"repository": "git://github.com/alecmekarzel/react-popover.git",
 	"publishConfig": {
 		"registry": "https://npm.pkg.github.com"
 	},
 	"main": "dist/index.js",
 	"module": "dist/react-popover.esm.js",
+	"types": "dist/index.d.ts",
 	"files": [
 		"dist",
 		"src"
@@ -16,36 +17,39 @@
 		"node": ">=10"
 	},
 	"scripts": {
-		"start": "parcel watch",
-		"build": "parcel build src/index.js",
-		"test": "parcel test --passWithNoTests",
-		"prepare": "parcel build src/index.js",
+		"start": "tsdx watch",
+		"build": "tsdx build src/index.ts",
+		"test": "tsdx test --passWithNoTests",
+		"prepare": "tsdx build src/index.ts",
 		"size": "size-limit",
 		"analyze": "size-limit --why"
 	},
 	"dependencies": {
 		"@alecmekarzel/outside-click": "^0.2.0",
 		"@popperjs/core": "^2.11.5",
-		"@types/react": "^18.0.12",
+		"@types/react": "^18.0.13",
 		"@types/react-dom": "^18.0.5",
 		"goober": "^2.1.9",
-		"react": ">=18",
-		"react-dom": "^18.1.0",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
 		"react-popper": "^2.3.0",
+		"tsdx": "^0.14.1",
 		"use-delayed": "^0.1.0"
 	},
 	"devDependencies": {
 		"@size-limit/preset-small-lib": "^7.0.8",
+		"@testing-library/react": "^13.0.0-alpha.7",
 		"husky": "^8.0.1",
-		"parcel": "^2.6.0",
-		"size-limit": "^7.0.8"
+		"size-limit": "^7.0.8",
+		"typescript": "^4.7.3"
 	},
 	"husky": {
 		"hooks": {
 			"pre-commit": "tsdx lint"
 		}
 	},
-	"size-limit": [{
+	"size-limit": [
+		{
 			"path": "dist/popover.cjs.production.min.js",
 			"limit": "10 KB"
 		},

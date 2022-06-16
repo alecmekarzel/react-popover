@@ -1,16 +1,13 @@
 import * as React from 'react'
-import * as ReactDOM from 'react-dom'
 import { Tooltip } from '../src'
+import { render } from '@testing-library/react'
 
 describe('tooltip', () => {
 	it('renders without crashing', () => {
-		const div = document.createElement('div')
-		ReactDOM.render(
+		render(
 			<Tooltip content="I am a Tooltip">
 				<button>Test</button>
-			</Tooltip>,
-			div
+			</Tooltip>
 		)
-		ReactDOM.unmountComponentAtNode(div)
 	})
 })
