@@ -23,6 +23,8 @@ let Inner = styled('div')`
 	padding: 6px 9px;
 	border-radius: 3px;
 	margin-bottom: 4px;
+	margin-left: 4px;
+	margin-right: 4px;
 `
 
 let fadeIn = keyframes`
