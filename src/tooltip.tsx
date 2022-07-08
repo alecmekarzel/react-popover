@@ -9,10 +9,6 @@ let Wrapper = styled('div', React.forwardRef)`
 	width: fit-content;
 	z-index: 9999;
 	pointer-events: none;
-
-	&.open {
-		pointer-events: all;
-	}
 `
 
 let Inner = styled('div')`
@@ -22,9 +18,7 @@ let Inner = styled('div')`
 	background: rgba(0, 0, 0, 0.8);
 	padding: 6px 9px;
 	border-radius: 3px;
-	margin-bottom: 4px;
-	margin-left: 4px;
-	margin-right: 4px;
+	margin: 4px;
 `
 
 let fadeIn = keyframes`
