@@ -1,4 +1,4 @@
-import { styled, keyframes } from 'goober'
+import { styled } from 'goober'
 import React, {
 	createRef,
 	useMemo,
@@ -9,7 +9,8 @@ import React, {
 import { usePopper } from 'react-popper'
 import useDelayed from 'use-delayed'
 import outsideClick from '@alecmekarzel/outside-click'
-import { RenderTo } from './portal'
+import { RenderTo } from './RenderTo'
+import { fadeDownIn, fadeDownOut, fadeIn, fadeOut } from '../keyframes'
 
 let Shadow = styled('div')`
 	width: 100%;
@@ -33,50 +34,6 @@ let Wrapper = styled('div', React.forwardRef)`
 let Inner = styled('div')`
 	opacity: 1;
 	position: relative;
-`
-
-let fadeIn = keyframes`
-	from {
-		opacity: 0;
-	}
-
-	to {
-		opacity: 1;
-	}
-`
-
-let fadeOut = keyframes`
-	from {
-		opacity: 1;
-	}
-
-	to {
-		opacity: 0;
-	}
-`
-
-let fadeDropIn = keyframes`
-	from {
-		opacity: 0;
-		top: -6px;
-	}
-
-	to {
-		opacity: 1;
-		top: 0px;
-	}
-`
-
-let fadeDropOut = keyframes`
-	from {
-		opacity: 1;
-		top: 0px;
-	}
-
-	to {
-		opacity: 0;
-		top: -6px;
-	}
 `
 
 type PopupProps = {
@@ -175,7 +132,7 @@ export let Popup = React.forwardRef(
 							<Inner
 								style={{
 									animation: `${
-										open ? fadeDropIn : fadeDropOut
+										open ? fadeDownIn : fadeDownOut
 									} 0.1s ease-in-out forwards`,
 								}}
 							>

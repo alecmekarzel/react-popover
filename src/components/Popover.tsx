@@ -1,9 +1,10 @@
-import { styled, keyframes } from 'goober'
+import { styled } from 'goober'
 import React, { createRef, useCallback, useEffect, useState } from 'react'
 import { usePopper } from 'react-popper'
 import useDelayed from 'use-delayed'
 import outsideClick from '@alecmekarzel/outside-click'
-import { RenderTo } from './portal'
+import { RenderTo } from './RenderTo'
+import { fadeDownIn, fadeDownOut } from '../keyframes'
 
 let Wrapper = styled('div', React.forwardRef)`
 	z-index: 9998;
@@ -17,30 +18,6 @@ let Wrapper = styled('div', React.forwardRef)`
 let Inner = styled('div')`
 	opacity: 1;
 	position: relative;
-`
-
-let fadeIn = keyframes`
-	from {
-		opacity: 0;
-		top: -8px;
-	}
-
-	to {
-		opacity: 1;
-		top: -4px;
-	}
-`
-
-let fadeOut = keyframes`
-	from {
-		opacity: 1;
-		top: -4px;
-	}
-
-	to {
-		opacity: 0;
-		top: -8px;
-	}
 `
 
 type PopoverProps = {
@@ -120,7 +97,7 @@ export let Popover = React.forwardRef(
 							<Inner
 								style={{
 									animation: `${
-										open ? fadeIn : fadeOut
+										open ? fadeDownIn : fadeDownOut
 									} 0.1s ease-in-out forwards`,
 								}}
 							>

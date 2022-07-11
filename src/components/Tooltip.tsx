@@ -1,9 +1,10 @@
-import { keyframes, styled } from 'goober'
+import { styled } from 'goober'
 import React, { useEffect, useRef, useState } from 'react'
 import { usePopper } from 'react-popper'
 import useDelayed from 'use-delayed'
 import outsideClick from '@alecmekarzel/outside-click'
-import { RenderTo } from './portal'
+import { RenderTo } from './RenderTo'
+import { fadeIn, fadeOut } from '../keyframes'
 
 let Wrapper = styled('div', React.forwardRef)`
 	width: fit-content;
@@ -19,30 +20,6 @@ let Inner = styled('div')`
 	padding: 6px 9px;
 	border-radius: 3px;
 	margin: 4px;
-`
-
-let fadeIn = keyframes`
-	from {
-		opacity: 0;
-		margin-top: -5px;
-	}
-
-	to {
-		opacity: 1;
-		margin-top: 0px;
-	}
-`
-
-let fadeOut = keyframes`
-	from {
-		opacity: 1;
-		margin-top: 0px;
-	}
-
-	to {
-		opacity: 0;
-		margin-top: -5px;
-	}
 `
 
 type TooltipProps = {
