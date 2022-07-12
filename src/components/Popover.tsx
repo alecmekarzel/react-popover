@@ -16,7 +16,6 @@ let Wrapper = styled('div', React.forwardRef)`
 `
 
 let Inner = styled('div')`
-	opacity: 1;
 	position: relative;
 `
 
@@ -78,7 +77,6 @@ export let Popover = React.forwardRef(
 						width: 'fit-content',
 						height: 'fit-content',
 						display: 'inline-block',
-						cursor: 'pointer',
 						lineHeight: '0',
 					}}
 					data-popover-anchor

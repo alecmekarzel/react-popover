@@ -26,7 +26,7 @@ import { usePopper } from 'react-popper'
 let Shadow = styled('div')`
 	width: 100%;
 	height: 100%;
-	background: rgba(0, 0, 0, 0.4);
+	background: rgba(0, 0, 0, 0.3);
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -43,7 +43,6 @@ let Wrapper = styled('div', React.forwardRef)`
 `
 
 let Inner = styled('div')`
-	opacity: 1;
 	position: relative;
 `
 
