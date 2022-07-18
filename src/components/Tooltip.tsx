@@ -56,7 +56,7 @@ export let Tooltip = ({
 	let tooltipEl
 
 	if (typeof element === 'string')
-		tooltipEl = <GenericTooltip>{tooltipEl}</GenericTooltip>
+		tooltipEl = <GenericTooltip>{element}</GenericTooltip>
 	else if (typeof element === 'function')
 		// Take the element function, pass in props to function for next functional component
 		tooltipEl = element({
