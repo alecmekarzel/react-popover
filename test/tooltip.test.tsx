@@ -5,7 +5,7 @@ import { render } from '@testing-library/react'
 describe('tooltip', () => {
 	it('renders without crashing', () => {
 		render(
-			<Tooltip content="I am a Tooltip">
+			<Tooltip element="I am a Tooltip">
 				<button>Test</button>
 			</Tooltip>
 		)

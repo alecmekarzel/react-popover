@@ -16,8 +16,20 @@ let Inner = styled('div')`
 	position: relative;
 `
 
+let GenericTooltip = styled('div')`
+	color: white;
+	font-size: 0.75em;
+	font-weight: 500;
+	background: rgba(0, 0, 0, 0.8);
+	padding: 5px 8px;
+	border-radius: 3px;
+	margin: 4px;
+`
+
 type TooltipProps = {
-	element: (d: { visible: boolean; open: boolean }) => React.ReactElement
+	element:
+		| string
+		| ((d: { visible: boolean; open: boolean }) => React.ReactElement)
 	children: React.ReactNode
 	placement?: any
 	attachTo?: string
@@ -41,7 +53,20 @@ export let Tooltip = ({
 	let visible = useDelayed(open, 500, [true])
 	let enterToRef = useRef() as any
 
-	let tooltipEl = element({ visible, open }) // Take the element function, pass in props to function for next functional component
+	let tooltipEl
+
+	if (typeof element === 'string')
+		tooltipEl = <GenericTooltip>{tooltipEl}</GenericTooltip>
+	else if (typeof element === 'function')
+		// Take the element function, pass in props to function for next functional component
+		tooltipEl = element({
+			visible,
+			open,
+		})
+	else
+		throw Error(
+			'Tooltip component must have a valid element property that returns either a string or function returning an Element'
+		)
 
 	useEffect(() => {
 		return outsideClick(
