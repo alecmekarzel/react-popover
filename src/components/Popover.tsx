@@ -27,7 +27,7 @@ type PopoverProps = {
 	}) => React.ReactElement
 	children: React.ReactElement | React.ReactElement[]
 	placement?: any
-	attachTo?: HTMLElement
+	attachTo?: string
 }
 
 export let Popover = React.forwardRef(
@@ -85,7 +85,7 @@ export let Popover = React.forwardRef(
 				</div>
 
 				{visible && (
-					<RenderTo custom={attachTo ? attachTo : document.body}>
+					<RenderTo selector={attachTo ? attachTo : document.body}>
 						<Wrapper
 							className={open ? 'open' : ''}
 							ref={setPopperElement}

@@ -8,7 +8,6 @@ import React, {
 } from 'react'
 import { usePopper } from 'react-popper'
 import useDelayed from 'use-delayed'
-import outsideClick from '@alecmekarzel/outside-click'
 import { RenderTo } from './RenderTo'
 import { fadeDownIn, fadeDownOut, fadeIn, fadeOut } from '../keyframes'
 
@@ -42,7 +41,7 @@ type PopupProps = {
 		close: () => void
 	}) => React.ReactElement
 	children: React.ReactElement | React.ReactElement[]
-	attachTo?: HTMLElement
+	attachTo?: string
 }
 
 export let Popup = React.forwardRef(
@@ -84,14 +83,6 @@ export let Popup = React.forwardRef(
 		let popupEl = element({ visible, open, close })
 
 		useEffect(() => {
-			return outsideClick(
-				[referenceElement, popperElement],
-				() => setOpen(false), // set open to false on outside click
-				() => open // determine whether popup is enabled
-			)
-		}, [referenceElement, popperElement, open])
-
-		useEffect(() => {
 			// if there's no ref, create one
 			if (!ref) ref = createRef()
 			ref.current = { setOpen }
@@ -114,8 +105,9 @@ export let Popup = React.forwardRef(
 				</div>
 
 				{visible && (
-					<RenderTo custom={attachTo ? attachTo : document.body}>
+					<RenderTo selector={attachTo ? attachTo : document.body}>
 						<Shadow
+							onClick={() => setOpen(false)}
 							style={{
 								animation: `${
 									open ? fadeIn : fadeOut

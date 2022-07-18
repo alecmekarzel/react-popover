@@ -13,24 +13,18 @@ let Wrapper = styled('div', React.forwardRef)`
 `
 
 let Inner = styled('div')`
-	color: white;
-	font-size: 0.8em;
-	font-weight: 500;
-	background: rgba(0, 0, 0, 0.8);
-	padding: 6px 9px;
-	border-radius: 3px;
-	margin: 4px;
+	position: relative;
 `
 
 type TooltipProps = {
-	content: string
+	element: (d: { visible: boolean; open: boolean }) => React.ReactElement
 	children: React.ReactNode
 	placement?: any
-	attachTo?: HTMLElement
+	attachTo?: string
 }
 
 export let Tooltip = ({
-	content,
+	element,
 	children,
 	placement = 'top',
 	attachTo,
@@ -46,6 +40,8 @@ export let Tooltip = ({
 	let [open, setOpen] = useState(false)
 	let visible = useDelayed(open, 500, [true])
 	let enterToRef = useRef() as any
+
+	let tooltipEl = element({ visible, open }) // Take the element function, pass in props to function for next functional component
 
 	useEffect(() => {
 		return outsideClick(
@@ -84,7 +80,7 @@ export let Tooltip = ({
 			</div>
 
 			{visible && (
-				<RenderTo custom={attachTo ? attachTo : document.body}>
+				<RenderTo selector={attachTo ? attachTo : document.body}>
 					<Wrapper
 						className={open ? 'open' : ''}
 						ref={setPopperElement}
@@ -98,7 +94,7 @@ export let Tooltip = ({
 								} 0.1s ease-in-out forwards`,
 							}}
 						>
-							{content}
+							{tooltipEl}
 						</Inner>
 					</Wrapper>
 				</RenderTo>

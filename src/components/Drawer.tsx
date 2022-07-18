@@ -7,7 +7,6 @@ import React, {
 	useState,
 } from 'react'
 import useDelayed from 'use-delayed'
-import outsideClick from '@alecmekarzel/outside-click'
 import { RenderTo } from './RenderTo'
 import {
 	fadeIn,
@@ -54,7 +53,7 @@ type DrawerProps = {
 	}) => React.ReactElement
 	children: React.ReactElement | React.ReactElement[]
 	placement?: 'top' | 'bottom' | 'left' | 'right'
-	attachTo?: HTMLElement
+	attachTo?: string
 }
 
 export let Drawer = React.forwardRef(
@@ -125,14 +124,6 @@ export let Drawer = React.forwardRef(
 		let drawerEl = element({ visible, open, close })
 
 		useEffect(() => {
-			return outsideClick(
-				[referenceElement, popperElement],
-				() => setOpen(false), // set open to false on outside click
-				() => open // determine whether Drawer is enabled
-			)
-		}, [referenceElement, popperElement, open])
-
-		useEffect(() => {
 			// if there's no ref, create one
 			if (!ref) ref = createRef()
 			ref.current = { setOpen }
@@ -172,8 +163,9 @@ export let Drawer = React.forwardRef(
 				</div>
 
 				{visible && (
-					<RenderTo custom={attachTo ? attachTo : document.body}>
+					<RenderTo selector={attachTo ? attachTo : document.body}>
 						<Shadow
+							onClick={() => setOpen(false)}
 							style={{
 								animation: `${
 									open ? fadeIn : fadeOut
