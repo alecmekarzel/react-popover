@@ -1,10 +1,10 @@
+import outsideClick from '@alecmekarzel/outside-click'
 import { styled } from 'goober'
 import React, { useEffect, useRef, useState } from 'react'
 import { usePopper } from 'react-popper'
 import useDelayed from 'use-delayed'
-import outsideClick from '@alecmekarzel/outside-click'
-import { RenderTo } from './RenderTo'
 import { fadeIn, fadeOut } from '../keyframes'
+import { RenderTo } from './RenderTo'
 
 let Wrapper = styled('div', React.forwardRef)`
 	width: fit-content;
@@ -31,7 +31,7 @@ type TooltipProps = {
 		| string
 		| ((d: { visible: boolean; open: boolean }) => React.ReactElement)
 	children: React.ReactNode
-	placement?: any
+	placement?: 'top' | 'bottom' | 'left' | 'right'
 	attachTo?: string
 }
 

@@ -1,10 +1,10 @@
+import outsideClick from '@alecmekarzel/outside-click'
 import { styled } from 'goober'
 import React, { createRef, useCallback, useEffect, useState } from 'react'
 import { usePopper } from 'react-popper'
 import useDelayed from 'use-delayed'
-import outsideClick from '@alecmekarzel/outside-click'
-import { RenderTo } from './RenderTo'
 import { fadeDownIn, fadeDownOut } from '../keyframes'
+import { RenderTo } from './RenderTo'
 
 let Wrapper = styled('div', React.forwardRef)`
 	z-index: 9998;
@@ -26,7 +26,7 @@ type PopoverProps = {
 		close: () => void
 	}) => React.ReactElement
 	children: React.ReactElement | React.ReactElement[]
-	placement?: any
+	placement?: 'top' | 'bottom' | 'left' | 'right'
 	attachTo?: string
 }
 
