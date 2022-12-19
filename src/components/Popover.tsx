@@ -24,17 +24,30 @@ type PopoverProps = {
 		visible: boolean
 		open: boolean
 		close: () => void
+
+		pinned: boolean
+		pin: () => void
+		unpin: () => void
 	}) => React.ReactElement
 	children: React.ReactElement | React.ReactElement[]
 	placement?: 'top' | 'bottom' | 'left' | 'right'
 	attachTo?: string
+	alwaysPresent?: boolean
 }
 
 export let Popover = React.forwardRef(
 	(
-		{ element, children, placement = 'top', attachTo }: PopoverProps,
+		{
+			element,
+			children,
+			placement = 'top',
+			attachTo,
+			alwaysPresent = false,
+		}: PopoverProps,
 		ref: any
 	) => {
+		let [isPinned, setIsPinned] = useState(false)
+		let [hasClicked, setHasClicked] = useState(false)
 		let [referenceElement, setReferenceElement] = useState(null) as any
 		let [popperElement, setPopperElement] = useState(null) as any
 
@@ -51,8 +64,17 @@ export let Popover = React.forwardRef(
 		let [open, setOpen] = useState(false)
 		let visible = useDelayed(open, 500, [true])
 		let close = useCallback(() => setOpen(false), [setOpen])
+		let pin = useCallback(() => setIsPinned(true), [setIsPinned])
+		let unpin = useCallback(() => setIsPinned(false), [setIsPinned])
 
-		let popoverEl = element({ visible, open, close }) // Take the element function, pass in props to function for next functional component
+		let popoverEl = element({
+			visible,
+			open,
+			close,
+			pin,
+			unpin,
+			pinned: isPinned,
+		}) // Take the element function, pass in props to function for next functional component
 
 		useEffect(() => {
 			return outsideClick(
@@ -72,7 +94,10 @@ export let Popover = React.forwardRef(
 				<div
 					tabIndex={0}
 					ref={setReferenceElement}
-					onClick={() => setOpen(!open)}
+					onClick={() => {
+						setOpen(!open)
+						setHasClicked(true)
+					}}
 					style={{
 						width: 'fit-content',
 						height: 'fit-content',
@@ -84,10 +109,10 @@ export let Popover = React.forwardRef(
 					{children}
 				</div>
 
-				{visible && (
+				{visible || (hasClicked && alwaysPresent) || isPinned ? (
 					<RenderTo selector={attachTo ? attachTo : document.body}>
 						<Wrapper
-							className={open ? 'open' : ''}
+							className={open || isPinned ? 'open' : ''}
 							ref={setPopperElement}
 							style={styles.popper}
 							{...attributes.popper}
@@ -95,7 +120,9 @@ export let Popover = React.forwardRef(
 							<Inner
 								style={{
 									animation: `${
-										open ? fadeDownIn : fadeDownOut
+										open || isPinned
+											? fadeDownIn
+											: fadeDownOut
 									} 0.1s ease-in-out forwards`,
 								}}
 							>
@@ -103,7 +130,7 @@ export let Popover = React.forwardRef(
 							</Inner>
 						</Wrapper>
 					</RenderTo>
-				)}
+				) : null}
 			</>
 		)
 	}
