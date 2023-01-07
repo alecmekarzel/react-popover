@@ -1,15 +1,15 @@
 import { styled } from 'goober'
 import React, {
 	createRef,
-	useMemo,
 	useCallback,
 	useEffect,
+	useMemo,
 	useState,
 } from 'react'
 import { usePopper } from 'react-popper'
 import useDelayed from 'use-delayed'
-import { RenderTo } from './RenderTo'
 import { fadeDownIn, fadeDownOut, fadeIn, fadeOut } from '../keyframes'
+import { RenderTo } from './RenderTo'
 
 let Shadow = styled('div')`
 	width: 100%;
@@ -42,10 +42,11 @@ type PopupProps = {
 	}) => React.ReactElement
 	children: React.ReactElement | React.ReactElement[]
 	attachTo?: string
+	style?: any
 }
 
 export let Popup = React.forwardRef(
-	({ element, children, attachTo }: PopupProps, ref: any) => {
+	({ element, children, attachTo, style }: PopupProps, ref: any) => {
 		let [referenceElement, setReferenceElement] = useState(null) as any
 		let [popperElement, setPopperElement] = useState(null) as any
 
@@ -54,12 +55,19 @@ export let Popup = React.forwardRef(
 				name: 'computeStyles',
 				enabled: true,
 				fn({ state }: { state: any }) {
-					state.styles.popper = {
-						...state.styles.popper,
-						position: 'fixed',
-						top: '50%',
-						left: '50%',
-						transform: 'translate(-50%, -50%)',
+					if (style) {
+						state.styles.popper = {
+							...state.styles.popper,
+							...style,
+						}
+					} else {
+						state.styles.popper = {
+							...state.styles.popper,
+							position: 'fixed',
+							top: '50%',
+							left: '50%',
+							transform: 'translate(-50%, -50%)',
+						}
 					}
 
 					return state

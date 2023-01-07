@@ -77,8 +77,12 @@ export let Popover = React.forwardRef(
 		}) // Take the element function, pass in props to function for next functional component
 
 		useEffect(() => {
+			const allPopoverElements = Array.from(
+				document.querySelectorAll('[data-popover-wrapper]')
+			)
+
 			return outsideClick(
-				[referenceElement, popperElement],
+				[referenceElement, popperElement, ...allPopoverElements],
 				() => setOpen(false),
 				() => open
 			)
@@ -115,6 +119,7 @@ export let Popover = React.forwardRef(
 							className={open || isPinned ? 'open' : ''}
 							ref={setPopperElement}
 							style={styles.popper}
+							data-popover-wrapper
 							{...attributes.popper}
 						>
 							<Inner
