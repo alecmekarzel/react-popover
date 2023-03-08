@@ -1,4 +1,4 @@
-import outsideClick from '@alecmekarzel/outside-click'
+import { outsideClick } from '@alecmekarzel/outside-click'
 import { styled } from 'goober'
 import React, { useEffect, useRef, useState } from 'react'
 import { usePopper } from 'react-popper'
@@ -31,7 +31,19 @@ type TooltipProps = {
 		| string
 		| ((d: { visible: boolean; open: boolean }) => React.ReactElement)
 	children: React.ReactNode
-	placement?: 'top' | 'bottom' | 'left' | 'right'
+	placement?:
+		| 'top'
+		| 'bottom'
+		| 'left'
+		| 'right'
+		| 'top-start'
+		| 'top-end'
+		| 'bottom-start'
+		| 'bottom-end'
+		| 'right-start'
+		| 'right-end'
+		| 'left-start'
+		| 'left-end'
 	attachTo?: string
 }
 
@@ -82,8 +94,8 @@ export let Tooltip = ({
 				tabIndex={0}
 				ref={setReferenceElement}
 				onClick={() => {
-					if (open) clearTimeout(enterToRef.current)
-					setOpen(true)
+					clearTimeout(enterToRef.current)
+					setOpen(false)
 				}}
 				onMouseEnter={() => {
 					clearTimeout(enterToRef.current)

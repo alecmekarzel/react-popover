@@ -1,4 +1,4 @@
-import outsideClick from '@alecmekarzel/outside-click'
+import { outsideClick } from '@alecmekarzel/outside-click'
 import { styled } from 'goober'
 import React, { createRef, useCallback, useEffect, useState } from 'react'
 import { usePopper } from 'react-popper'
@@ -77,12 +77,8 @@ export let Popover = React.forwardRef(
 		}) // Take the element function, pass in props to function for next functional component
 
 		useEffect(() => {
-			const allPopoverElements = Array.from(
-				document.querySelectorAll('[data-popover-wrapper]')
-			)
-
 			return outsideClick(
-				[referenceElement, popperElement, ...allPopoverElements],
+				[referenceElement, popperElement],
 				() => setOpen(false),
 				() => open
 			)
