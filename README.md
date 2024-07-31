@@ -1,14 +1,4 @@
-<p align="center">
-  <img src="https://i.imgur.com/F6V9i2q.png" width="200px">
-</p>
-
-<h1 align="center">
-  <strong>alecmeka's</strong> Popover and Tooltip Library
-</h1>
-
-<p align="center">
-  Simple Tooltip and Popover components made by alecmeka 💖
-</p>
+# React Popover
 
 ## Examples
 
@@ -16,20 +6,10 @@
 -   🚚 [Popover](https://codesandbox.io/s/)
 -   🚚 [Popup](https://codesandbox.io/s/)
 
-## Install
-
-```bash
-# yarn
-yarn add @alecmeka/react-popover
-
-# npm
-npm install --save @alecmeka/react-popover
-```
-
 ## Tooltips
 
 ```jsx
-import { Tooltip } from '@alecmeka/react-popover'
+import { Tooltip } from 'react-popover'
 
 let Component = () => {
 	return (
@@ -43,7 +23,7 @@ let Component = () => {
 ## Popovers
 
 ```jsx
-import { Popover } from '@alecmeka/react-popover'
+import { Popover } from 'react-popover'
 
 let Component = () => {
 	return (
@@ -72,9 +52,3 @@ The `open` value is `true` when the popover is fully visible or animating.
 The `visible` value is `true` when the popover is fully visible.
 
 The `close` value is a function, which you can call to close the popover.
-
-## License
-
-© [Alec Meka](https://github.com/alecmeka)
-
-[![Made by Alec Meka](https://potato.alecmeka.co/oss/badge.svg)](https://alecmeka.co)
